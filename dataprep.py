@@ -23,11 +23,11 @@ def squareWaveDataset(period, duration, length, offset=0, label_offset=1, size=1
     return X, Y
 
 if __name__ == "__main__":
-    num_time_steps = 6
+    num_time_steps = 10
 
     execution_duration = 1
     task_period = 3
-    trainTextsSeq, labels = squareWaveDataset(task_period, execution_duration, num_time_steps)
+    trainTextsSeq, labels = squareWaveDataset(task_period, execution_duration, num_time_steps, size=1000)
 
     # load a list
     trainTextsSeq_flatten = trainTextsSeq.flatten()
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     # Reshape y_train:
     y_train_tiled = np.tile(labels, (num_time_steps,1))
-    y_train_tiled = np.transpose(y_train_tiled)
+    # y_train_tiled = np.transpose(y_train_tiled)
     y_train_tiled = y_train_tiled.reshape(len(labels), num_time_steps , 1)
     np.save("train_y", y_train_tiled)
     np.save("train_x", trainTextsSeq)
